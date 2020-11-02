@@ -5,38 +5,41 @@ on(a,b).
 on(b,c).    
 on(c,spot1).
 
-on_first(A) :-
-    on(A,spot1).
-on_first(A) :-
-    on(A,X),
-    on_first(X).
+:- dynamic prev/2.
 
-on_middle(A) :-
-    on(A, spot2).
-on_middle(A) :-
-    on(A,X),
-    on_middle(X).
+prev(a,spot1).
+prev(b,spot1).
+prev(c,spot1).
 
-on_last(A) :-
-    on(A,spot3).
-on_last(A) :-
-    on(A,X),
-    on_last(X).
+:- dynamic top/2.
+top(a,spot1).
+top(spot2,spot2).
+top(spot3,spot3).
 
-preserve_alph_ord(b,a) :-
-    false.
-preserve_alph_ord(c,b) :-
-    false.
-preserve_alph_ord(c,a) :-
-    false.
-preserve_alph_ord(_,_) :-
-    true.
+:- dynamic spot/2.
+spot(a,spot1).
+spot(b,spot1).
+spot(c,spot1).
+spot(spot1,spot1).
+spot(spot2,spot2).
+spot(spot3,spot3).
 
-is_adjecent(A,B) :-
-    not((on_first(A),on_last(B)) ; (on_first(B) , on_last(A))).
 
-put_on(A,A) :-
-    false.
+preserve_alph_ord(A,B) :-
+    (((A == a) ; (A == b, B == c) ; (B == spot1) ; (B == spot2) ; (B == spot3)) -> true; false).
+
+is_adjacent(A,B) :-
+    spot(A,X),
+    spot(B,Y),
+    ((X == Y ; X == spot2; Y == spot2) -> true ; false).
+
+clear_all(A,B) :-
+    clear_off(A),
+    clear_off(B),
+    (on(X,A) -> clear_all(A,B); true),
+    (on(X,B) -> clear_all(A,B); true).
+    
+
 put_on(A,B) :-
     on(A,B).
 put_on(A,B) :-
@@ -44,78 +47,51 @@ put_on(A,B) :-
     \+(A == spot1),
     \+(A == spot2),
     \+(A == spot3),
-    preserve_alph_ord(A,B),
-    is_adjecent(A,B),
+    (not(preserve_alph_ord(A,B)) -> on(B,Z), clear_off(Z), put_on(A,Z); true,
+    (not(is_adjacent(A,B)) -> top(H,spot2), put_on(A,H); true), 
+    \+(A == B),
+    clear_all(A,B),
     on(A,X),
-    clear_off(A),
-    on(B,Y),
-    clear_off(B),
-    print("test"),
+    retract(spot(A,_)),
+    spot(X,S),
+    assert(spot(A,S)),
     retract(on(A,X)),
     assert(on(A,B)),
-    assert(move(A,X,B)).
+    spot(X,O),
+    retract(prev(A,_)),
+    assert(prev(A,O)),
+    top(A,T),
+    top(B,R),
+    retract(spot(A,_)),
+    assert(spot(A,R)),
+    retract(top(A,_)),
+    assert(top(X,T)),
+    retract(top(B,_)),
+    assert(top(A,R)),
+    assert(move(A,X,B))).
 
-
-return_spot(spot1) :-
-    spot1 .
-return_spot(spot2) :-
-    spot2 .
-return_spot(spot3) :-
-    spot3 .
-return_spot(A) :-
-    on(A,X),
-    return_spot(X).
-
-return_top(A) :-
-    on(X,A)
-    -> return_top(X)
-    ; A .
-
-find_next_spot(A,prev) :-
-    ((on_first(A) ; on_last(A)) -> spot2 ;
-     spot1
-    ).
-find_possible_move(A) :-
-    (return_spot(A) == spot1, preserve_alph_ord(A,return_top(spot2))) -> spot2;
-    (return_spot(A) == spot3, preserve_alph_ord(A,return_top(spot2))) -> spot2;
-    (return_spot(A) == spot2, preserve_alph_ord(A,return_top(spot3))) -> spot3;
-    (return_spot(A) == spot2, preserve_alph_ord(A,return_top(spot1))) -> spot1;
-    spot1.
-   
+clear_off(table).    
 clear_off(A) :-      
-    not(on(_,A)).
+    not(on(_X,A)).
 clear_off(A) :-
     on(X,A),
-    clear_off(X),    
-    retract(on(X,A)),
-    ((on_first(X) ; on_last(X))
-    -> ((X == a, (return_top(spot2) == c ; return_top(spot2) == b ; return_top(spot2) == spot2) )
-       -> put_on(X,return_top(spot2)) ,assert(move(X,A,return_top(spot2))), assert(on(X,return_top(spot2)))
-       ; (( X == b , (return_top(spot2) == c ; return_top(spot2) == spot2))
-	 -> put_on(X,return_top(spot2)) ,assert(move(X,A,return_top(spot2))), assert(on(X,return_top(spot2)))
-	 ; ((X == c, return_top(spot2) == spot2)
- 	   -> put_on(X,return_top(spot2)) ,assert(move(X,A,return_top(spot2))), assert(on(X,return_top(spot2)))
-	   ; clear_off(spot2)))
-       ; ( return_top(spot3) == spot3
-	 -> put_on(X,return_top(spot3)) ,assert(move(X,return_top(spot2),return_top(spot3))), assert(on(X,return_top(spot3)))
-	 ; (return_top(spot1) == spot1
-	   -> put_on(X,return_top(spot1)) ,assert(move(X,return_top(spot2),return_top(spot1))), assert(on(X,return_top(spot1)))
-	   ; false
-	   )))
-    ; false).
-
+    clear_off(X),
+    spot(X,S),
+    ((S == spot1; S == spot3) -> top(Z,spot2) ;
+     (prev(X,spot1) -> top(Z,spot3) ; top(Z,spot1))),
+    put_on(X,Z).
 
 do(Glist) :- 
-      do_all(Glist,Glist).
+    do_all(Glist,Glist).
 
 do_all([G|R],Allgoals) :-  
-     call(G),
-     do_all(R,Allgoals),!.   
+    call(G),
+    do_all(R,Allgoals),!.  
 
-do_all([G|_],Allgoals) :-    
-     achieve(G),
-     do_all(Allgoals,Allgoals).
-do_all([],_Allgoals).          
+do_all([G|_],Allgoals) :-  
+    achieve(G),
+    do_all(Allgoals,Allgoals).
+do_all([],_Allgoals).         
 
 achieve(on(A,B)) :-
-     put_on(A,B).
+    put_on(A,B).
