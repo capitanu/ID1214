@@ -1,4 +1,3 @@
-/* prolog tutorial 2.19  Actions and plans */
 
 :- dynamic on/2.
 
