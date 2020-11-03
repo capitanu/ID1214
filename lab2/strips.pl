@@ -55,8 +55,11 @@ put_on(A,B) :-
     retract(spot(A,_)),
     spot(X,S),
     assert(spot(A,S)),
+
+    
     retract(on(A,X)),
     assert(on(A,B)),
+    
     spot(X,O),
     retract(prev(A,_)),
     assert(prev(A,O)),
@@ -64,13 +67,13 @@ put_on(A,B) :-
     top(B,R),
     retract(spot(A,_)),
     assert(spot(A,R)),
+    
     retract(top(A,_)),
     assert(top(X,T)),
     retract(top(B,_)),
     assert(top(A,R)),
     assert(move(A,X,B))).
 
-clear_off(table).    
 clear_off(A) :-      
     not(on(_X,A)).
 clear_off(A) :-
@@ -91,6 +94,7 @@ do_all([G|R],Allgoals) :-
 do_all([G|_],Allgoals) :-  
     achieve(G),
     do_all(Allgoals,Allgoals).
+
 do_all([],_Allgoals).         
 
 achieve(on(A,B)) :-
