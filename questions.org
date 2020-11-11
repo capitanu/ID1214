@@ -1,6 +1,6 @@
 #+TITLE: Questions for AI
 #+AUTHOR: Calin Capitanu
-#+STARTUP: overview
+#+STARTUP: FOLDED
 
 * Lecture 1: What is AI?
 ** What is AI?
