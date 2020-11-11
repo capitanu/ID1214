@@ -1,0 +1,103 @@
+#+TITLE: Questions for AI
+#+AUTHOR: Calin Capitanu
+#+STARTUP: overview
+
+* Lecture 1: What is AI?
+** What is AI?
+** Who is considered to be the founder of AI?
+** What is Turing Test?
+** What is Weak AI? What is Strong AI?
+** Which are the main AI areas?
+** Where do you find AI systems in the society?
+** Which current areas are expanding today?
+** Is AI dangerous?
+** What ethic issues can arise?
+** Can AI systems handle morals?
+** Name the different intelligences?
+** What is singularity?
+** What is intelligence explosion?
+** Explain the road to superintelligence?
+** Is it possible to obtain superintellgence?
+* Lecture 2: Searching, Scheduling and Planning
+** Present the search terminology!
+** Name and describe the most commonly used terms for trees, graphs and networks?
+** What is uninofrmed blind search?
+** What does Brute-force mean?
+** Present and explain:
+*** Breadth-first search
+*** Depth-first search
+*** Bidirectional search
+*** Uniform cost
+*** Dijkstra's algorithm
+** What is informed blind search?
+** What is greedy search?
+** What is heuristic search?
+** Present and explain:
+*** Best-first search
+*** Hill climbing search
+*** A* search
+*** Event-driven Algorithm
+** Compare Dijkstra's Algorithm vs A* Search vs Concurrent Dijkstra's Algorithm
+*** What are the differences?
+** What is planning?
+** When is planning useful?
+** What is contraint programming?
+** What are the benefits of contraint programming?
+** What is scheduling?
+* Lecture 3: Decision-Support Systems, Expert Systems and Knowledge-Based Systems
+** What are decision-support systems?
+** Which levels of DSS exist and what are the differences?
+** Descrive the different categories of DSS
+** Descrive the content of DSS
+** What is Business Intelligence
+** What is included in Business Intelligence?
+** Describe Business Intelligence relation to Big Data/IoT
+** What are expert systems (ES)?
+** What are knowledge-based systems (KBS)?
+** Describe the difference between decision-support systems, expert systems and knowledge-based systems
+** What is reasoning strategy?
+** What is reasoning chaining?
+** Which reasoning chaining methods are used in DSS, ES and KBS?
+** What are shells?
+** Which are the reasoning strategies?
+** Which are used in the computer systems to conduct reasoning?
+** What are the similarities and differences between the different reasoning strategies?
+** Why is probabilistic reasoning with uncertainty needed?
+** Name and describe the different probabilistic reasoning strategies
+* Lecture 4: Knowledge Representations and Prototyping
+** What is knowledge representation?
+** Which knowledge representation are used in the KB?
+** What is prototyping?
+** Which sorts of prototyping exist?
+** What are the advantages and disadvantages with prototyping?
+** What is knowledge elicitation?
+** What is the knowledge acquisition?
+** What is the knowledge transfer?
+** Which are the common knowledge types?
+** Which graphic tools are good for analysing interviews and domain knowledge in DSS, ES and KBS?
+** Mention some of the limitations of ES and KBS?
+* Lecture 5: Agents and Multi-Agent Systems
+** What is a multi-agent system (MAS)?
+*** Advantages?
+*** Disadvantages?
+** Terminology for agents
+** What kind of agents exists in an agent system by providing information about:
+*** Software agents
+*** Intelligent agents
+*** Meta-agents
+*** Negotiation agents/Bargain agents
+*** Rational agents
+*** BDI agents
+*** Mobile agents
+*** Autonomous agents
+** Present and explain task environment and characteristics, such asL
+*** Agents (Multi/Single)
+*** Observable (Fully/Non/Partially)
+*** Deterministic/Stochastic
+*** Collaborative/Non-collaborative/Semi-collaborative
+*** Static/Dynamic
+*** Discrete/Continuous
+*** Episodic/Sequential
+** What is Swarm Intelligence? Provide some examples
+** What classes of intelligent agents are common?
+** What are the problems with MAS?
