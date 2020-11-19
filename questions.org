@@ -101,3 +101,28 @@
 ** What is Swarm Intelligence? Provide some examples
 ** What classes of intelligent agents are common?
 ** What are the problems with MAS?
+* Lecture 6: Machine Learning
+** What definitions are there for ML?
+** What is ML?
+** Are ML/ANN/DL the same or different things?
+** What are ML/ANN/DL good for? When is ML needed?
+** How does ML work?
+** What is ML process?
+** Why is data important? What problems can occur?
+** What are features?
+** What is a label?
+** What are examples?
+** What are the different kinds of training methods?
+** Give examples of calssification algorithms?
+** What is supervised learning?
+** What is mixed-attribute problem?
+** When it comes to output: what are decision tables, rules and decision trees?
+** What is unsupervised learning?
+** How does a clustering data set look like?
+** Which clustering algorithms are most commonly used?
+** What other types of learning are there?
+** How much data do you need?
+** What characteristics shall features have?
+** What are the problems with ML systems?
+** What is Underfitting/Overfitting?
+
