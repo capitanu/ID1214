@@ -125,4 +125,31 @@
 ** What characteristics shall features have?
 ** What are the problems with ML systems?
 ** What is Underfitting/Overfitting?
+* Lecture 7: Neural Networks
+** What are the definitions of artificial neural networks?
+** What can ANN be used for?
+** When are ANN good to use?
+** What is a single-layer perceptron?
+** What is a multi-layer perceptron?
+** What is an ANN? What does the ANN consist of?
+** How does the neural network training process work?
+** What is bias?
+** What are weights?
+** What is an activation level and what is activation function?
+** Which are the four most common activation functions? How do these work?
+** What is mean squared error and when is it used?
+** What is normalization?
+** Which ways are commonly used to normalize data?
+** How should normalization be applied in a neural network?
+** Which supervised learning algorithms are often used?
+** What is back-propagation?
+** How does the back-propagation process work?
+** What are the problems with back-propagation?
+** What is underfitting? What is overfitting?
+** What are genetic algorithms?
+** Which are the most commonly used unsupervised learning algorithms?
+** What is reinforcement learning?
+** What are deep neural networks?
+** What is deep learning?
+** What are pooling, flattening and pipeline?
 
