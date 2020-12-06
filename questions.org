@@ -152,4 +152,15 @@
 ** What are deep neural networks?
 ** What is deep learning?
 ** What are pooling, flattening and pipeline?
-
+* Lecture 8: Natural Language Processing
+** What is Natural Language Processing?
+** When to use it?
+** What is it good for?
+** What is Parsing/parser/parsing tree?
+** What is Generation?
+** What is syntax and how to handle syntax?
+** What is semantics and how to handle semantics?
+** When is Lexicon used?
+** What is Morphology and what is it used for?
+** What is Pragmatics? How to handle the pragmatics?
+** What are the problems with NLP?
