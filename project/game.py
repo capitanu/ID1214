@@ -42,6 +42,9 @@ class snake(object):
         self.body.append(self.head)
         self.dirnx = 0
         self.dirny = 1
+        self.addCube()
+        self.addCube()
+
         
     def move(self):
         for event in pygame.event.get():
