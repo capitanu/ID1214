@@ -2,6 +2,7 @@ from environment import Environment
 from snake_agent import Agent
 import tensorflow as tf
 import numpy as np
+from tensorflow.keras.models import load_model
 import time
 import pygame
 
@@ -19,10 +20,10 @@ stuck = 0
 each = 0
 
 
-epsilon, eps_min, eps_decay = 1, 0.05, 0.9997
+epsilon, eps_min, eps_decay = 0.7, 0.05, 0.9997
 env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
 agent = Agent()
-
+agent.dqn_local.dqn = load_model("saved/snake_dqn_save.h5")
 
 def print_data(score, max_score, info, episode):
     global wall
@@ -103,5 +104,8 @@ for episode in range(1, episodes + 1):
                     agent.save()
                     exit(0)
 
-                    
+if tf.test.gpu_device_name():
+    print('GPU found')
+else:
+    print("No GPU found")      
 agent.save()

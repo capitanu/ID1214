@@ -88,7 +88,7 @@ class Environment():
         update = False
         info = 0
         
-#        distance = math.sqrt(math.pow(self.SNAKE.head.pos[0] - self.snack.pos[0], 2) + math.pow(self.SNAKE.head.pos[1] - self.snack.pos[1] , 2))
+        distance = math.sqrt(math.pow(self.SNAKE.head.pos[0] - self.snack.pos[0], 2) + math.pow(self.SNAKE.head.pos[1] - self.snack.pos[1] , 2))
 
         if action == 0:
             if self.SNAKE.dirny != 0:
@@ -127,7 +127,7 @@ class Environment():
             reward = 100
             done = True
             info = 4
-            #        distance_after = math.sqrt(math.pow(self.SNAKE.head.pos[0] - self.snack.pos[0] , 2 ) + math.pow(self.SNAKE.head.pos[1] - self.snack.pos[1], 2))       
+        
 
         if self.SNAKE.head.pos[0] >= self.ROWS or self.SNAKE.head.pos[0] < 0 or self.SNAKE.head.pos[1] >= self.ROWS or self.SNAKE.head.pos[1] < 0:
             done = True
@@ -138,10 +138,16 @@ class Environment():
             done = True
             reward = -100
             info = 5
+        if moves >= 100:
+            reward = -50
+            info = 5
 
         if not done:
             self.SNAKE.move(update)
-            
+        distance_after = math.sqrt(math.pow(self.SNAKE.head.pos[0] - self.snack.pos[0] , 2 ) + math.pow(self.SNAKE.head.pos[1] - self.snack.pos[1], 2))      
+
+        if distance_after > distance:
+            reward -= 10
 #        print(reward)
         return self.SNAKE.state_info_2(self.snack), reward, done, len(self.SNAKE.body), food_eaten, info
     

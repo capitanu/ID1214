@@ -15,13 +15,13 @@ agent.dqn_local.dqn = load_model("saved/snake_dqn_2.h5")
 
 for episode in range(episodes):
     state = env.reset()
-    env.render()
+    env.render(state)
     moves = 0
     while True:
         action = agent.act(state)
         state, reward, done, score, apple_eaten, info = env.step(action, moves)
         time.sleep(0.1)
-        env.render()
+        env.render(state)
 
         if done:
             break
