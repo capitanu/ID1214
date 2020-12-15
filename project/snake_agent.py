@@ -5,8 +5,7 @@ from replay_memory import ReplayMemory
 
 class Agent():
 
-    def __init__(self, env):
-        self.env = env
+    def __init__(self):
         
         self.dqn_local = DQN()
         self.batch_size = self.dqn_local.BATCH_SIZE
@@ -48,7 +47,7 @@ class Agent():
     def act(self, state, epsilon = 0):
         state = state.reshape((1,) + state.shape)
         action_values = self.dqn_local.predict(state)
-        print(action_values)
+#        print(action_values)
 #        print(action_values)
         if random.random() > epsilon:
             action = np.argmax(action_values)

@@ -4,9 +4,9 @@ class DQN:
 
     def __init__(self):
         self.BATCH_SIZE = 40
-        self.GAMMA = 9.95
-        self.UPDATE_RATE = 500
-        self.LEARN_RATE = 0.0001
+        self.GAMMA = 0.95
+        self.UPDATE_RATE = 5
+        self.LEARN_RATE = 0.01
         self.INPUT_NODES = 32
         self.HIDDEN_NODES = (20, 16, 10)
         self.OUTPUT_NODES = 4

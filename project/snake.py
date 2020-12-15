@@ -102,6 +102,8 @@ class Snake(object):
         body_in_range = 0
         for i in range(self.head.pos[0] + 1, self.rows):
             if self.block_in_body_except_head((i, self.head.pos[1])):
+                if(i < snack.pos[0]):
+                    snack_available_1 = 0
                 body_in_range = 1
                 break
         state = np.append(state, [distance, snack_available_1, body_in_range])
@@ -115,6 +117,8 @@ class Snake(object):
         body_in_range = 0
         for i in range(0, self.head.pos[1]):
             if self.block_in_body_except_head((self.head.pos[0], i)):
+                if(i > snack.pos[1]):
+                    snack_available_2 = 0
                 body_in_range = 1
                 break
         state = np.append(state, [distance, snack_available_2, body_in_range])
@@ -128,6 +132,8 @@ class Snake(object):
         body_in_range = 0
         for i in range(0,self.head.pos[0]):
             if self.block_in_body_except_head((i, self.head.pos[1])):
+                if(i > snack.pos[0]):
+                    snack_available_3 = 0
                 body_in_range = 1
                 break
         state = np.append(state, [distance, snack_available_3, body_in_range])
@@ -141,6 +147,8 @@ class Snake(object):
         body_in_range = 0
         for i in range(self.head.pos[1] + 1,self.rows):
             if self.block_in_body_except_head((self.head.pos[0], i)):
+                if(i < snack.pos[1]):
+                    snack_available_4 = 0
                 body_in_range = 1
                 break
         state = np.append(state, [distance, snack_available_4, body_in_range])
@@ -155,8 +163,10 @@ class Snake(object):
             j -= 1
             if self.block_in_body_except_head((i,j)):
                 body_in_range = 1
+                break
             if snack.pos[0] == i and snack.pos[1] == j:
                 snack_available = 1
+                break
             distance += 1
         distance /= self.rows
         state = np.append(state, [distance, snack_available, body_in_range])
@@ -171,8 +181,10 @@ class Snake(object):
             j -= 1
             if self.block_in_body_except_head((i,j)):
                 body_in_range = 1
+                break
             if snack.pos[0] == i and snack.pos[1] == j:
                 snack_available = 1
+                break
             distance += 1
         distance /= self.rows
         state = np.append(state, [distance, snack_available, body_in_range])
@@ -188,8 +200,10 @@ class Snake(object):
             j += 1
             if self.block_in_body_except_head((i,j)):
                 body_in_range = 1
+                break
             if snack.pos[0] == i and snack.pos[1] == j:
                 snack_available = 1
+                break
             distance += 1
         distance /= self.rows
         state = np.append(state, [distance, snack_available, body_in_range])
@@ -205,8 +219,10 @@ class Snake(object):
             j += 1
             if self.block_in_body_except_head((i,j)):
                 body_in_range = 1
+                break
             if snack.pos[0] == i and snack.pos[1] == j:
                 snack_available = 1
+                break
             distance += 1
         distance /= self.rows
         state = np.append(state, [distance, snack_available, body_in_range])

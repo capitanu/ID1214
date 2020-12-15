@@ -9,7 +9,7 @@ ENV_WIDTH = 500
 ENV_ROWS = 5
 episodes = 100
 env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
-agent = Agent(env)
+agent = Agent()
 agent.dqn_local.dqn = load_model("saved/snake_dqn_2.h5")
 
 
@@ -19,7 +19,7 @@ for episode in range(episodes):
     moves = 0
     while True:
         action = agent.act(state)
-        state, reward, done, score, apple_eaten = env.step(action, moves)
+        state, reward, done, score, apple_eaten, info = env.step(action, moves)
         time.sleep(0.1)
         env.render()
 

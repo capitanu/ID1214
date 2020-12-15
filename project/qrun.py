@@ -5,39 +5,90 @@ import numpy as np
 import time
 import pygame
 
+
+
 ENV_WIDTH = 500
 ENV_ROWS = 5
 #night episodes = 10000000000
-episodes = 100
+episodes = 10000
+wall = 0
+itself = 0
+ate = 0
+won = 0
+stuck = 0
+each = 0
+
+
 epsilon, eps_min, eps_decay = 1, 0.05, 0.9997
 env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
-agent = Agent(env)
-best_score = 0
-score = 0
-while(True):
-#for episode in range(1, episodes + 1):
+agent = Agent()
 
-    epsilon = max(epsilon*eps_decay, eps_min)
-    state = env.reset()    
-    action = agent.act(state, epsilon)
+
+def print_data(score, max_score, info, episode):
+    global wall
+    global itself
+    global ate
+    global won
+    global stuck
+    print("Max score: " + str(max_score))
+    print("Episode: " + str(episode))
+    print("Hit the wall: " + str(wall))
+    print("Hit itself: " + str(itself))
+    print("Ate the food: " + str(ate))
+    print("Stuck: " + str(stuck))
+        
+    print("THERE IS NO WAY IT WON: " + str(won))
     
-    env.render()
-
-    score = 0
+    print("--------------------")
+    print("--------------------")
+        
+        
+        
+    
+max_score = 0
+#while(True):
+for episode in range(1, episodes + 1):
+    each += 1
+    epsilon = max(epsilon*eps_decay, eps_min)
+    
+    state = env.reset()
+    env.render(state)
+    action = agent.act(state, epsilon)
+   
     moves = 0
+    info = 0
     apple_eaten = False
     while True:
-        next_state, reward, done, score, apple_eaten = env.step(action, moves)
+        next_state, reward, done, score, apple_eaten, info = env.step(action, moves)
         if apple_eaten:
             moves = 0
         agent.experience(state, action, reward, next_state, done)
         agent.learn()
-        env.render()
         moves += 1
+        if(each % 10 == 0):
+            print_data(score, max_score, info, episode)
+            each += 1
+        if(score > max_score):
+            max_score = score
+        if(info == 1):
+            wall = wall + 1
+
+        if(info == 4):
+            won = won + 1
+
+        if(info == 5):
+            stuck = stuck + 1
+        if(info == 2):
+            itself = itself + 1
+
+        if(info == 3):
+            ate = ate + 1
+            
         if done:
             break
-
         state = next_state
+        env.render(state)
+        
         action = agent.act(state, epsilon)
 
         
