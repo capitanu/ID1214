@@ -7,21 +7,20 @@ import pygame
 
 ENV_WIDTH = 500
 ENV_ROWS = 5
-episodes = 10
+episodes = 100
 env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
 agent = Agent(env)
-agent.dqn_local.dqn = load_model("saved/snake_dqn.h5")
+agent.dqn_local.dqn = load_model("saved/snake_dqn_2.h5")
 
 
 for episode in range(episodes):
     state = env.reset()
     env.render()
-
+    moves = 0
     while True:
         action = agent.act(state)
-        print(action)
-        state, reward, done, score = env.step(action)
-        time.sleep(0.01)
+        state, reward, done, score, apple_eaten = env.step(action, moves)
+        time.sleep(0.1)
         env.render()
 
         if done:

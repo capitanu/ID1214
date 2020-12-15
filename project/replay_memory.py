@@ -12,7 +12,8 @@ class ReplayMemory:
         return len(self.replay_memory)
 
     def memorize(self, state, action, reward, next_state, done):
-        self.replay_memory.append(tuple((state, action, reward, next_state, done)))
+        e = tuple((state,action,reward,next_state,done))
+        self.replay_memory.append(e)
 
     def sample(self, INPUT_NODES):
         experiences = random.sample(self.replay_memory, k = self.batch_size)

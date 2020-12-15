@@ -37,13 +37,14 @@ class Environment():
         state = self.SNAKE.state_info_2(self.snack)
         return state
 
-    def step(self, action):
+    
+    def step(self, action, moves):
         reward = 0
         done = False
         food_eaten = False
         update = False
-        x_change, y_change = 0, 0
-        distance = math.sqrt(math.pow(self.SNAKE.head.pos[0] - self.snack.pos[0], 2) + math.pow(self.SNAKE.head.pos[1] - self.snack.pos[1] , 2))
+        
+#        distance = math.sqrt(math.pow(self.SNAKE.head.pos[0] - self.snack.pos[0], 2) + math.pow(self.SNAKE.head.pos[1] - self.snack.pos[1] , 2))
 
         if action == 0:
             if self.SNAKE.dirny != 0:
@@ -67,27 +68,31 @@ class Environment():
                 update = True
         
         if self.SNAKE.block_in_body_except_head((self.SNAKE.head.pos[0], self.SNAKE.head.pos[1])):
-            reward = -50
+#            reward = -50
             done = True
 
         if self.SNAKE.head.pos == self.snack.pos:
             self.SNAKE.addCube()
             self.snack = Cube(self.random_apple(), color = (0,255,0))
-            reward = 50
+ #           reward = 50
             foot_eaten = True
 
 #        distance_after = math.sqrt(math.pow(self.SNAKE.head.pos[0] - self.snack.pos[0] , 2 ) + math.pow(self.SNAKE.head.pos[1] - self.snack.pos[1], 2))       
 
         if self.SNAKE.head.pos[0] >= self.ROWS or self.SNAKE.head.pos[0] < 0 or self.SNAKE.head.pos[1] >= self.ROWS or self.SNAKE.head.pos[1] < 0:
             done = True
-            reward = -50
+  #          reward = -50
 
-        if not done and not food_eaten:
+        if moves >= 1000:
+            done = True
+   #         reward = -100
+
+        if not done:
             self.SNAKE.move(update)
-            
 
-# might need to reset the snake, we'll see            
-        return self.SNAKE.state_info_2(self.snack), reward, done, len(self.SNAKE.body)
+            
+#        print(reward)
+        return self.SNAKE.state_info_2(self.snack), reward, done, len(self.SNAKE.body), food_eaten
             
     
     def random_apple(self):

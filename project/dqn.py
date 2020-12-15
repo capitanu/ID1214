@@ -3,12 +3,12 @@ import tensorflow as tf
 class DQN:
 
     def __init__(self):
-        self.BATCH_SIZE = 64
+        self.BATCH_SIZE = 40
         self.GAMMA = 9.95
-        self.UPDATE_RATE = 5
-        self.LEARN_RATE = 0.01
+        self.UPDATE_RATE = 500
+        self.LEARN_RATE = 0.0001
         self.INPUT_NODES = 32
-        self.HIDDEN_NODES = (32, 16, 10)
+        self.HIDDEN_NODES = (20, 16, 10)
         self.OUTPUT_NODES = 4
         self.dqn = tf.keras.Sequential()
         self.dqn.add(tf.keras.layers.Dense(units = self.HIDDEN_NODES[0], input_dim = self.INPUT_NODES, activation = tf.nn.relu))
@@ -21,8 +21,8 @@ class DQN:
         # self.dqn.compile(optimizer = adam, loss = loss_fn, metrics = accuracy)
         self.dqn.compile(optimizer = tf.keras.optimizers.Adam(self.LEARN_RATE), loss='mse',metrics=['accuracy'])
 
-    def train(self, states, actions):
-        self.dqn.fit(states, actions,batch_size =  self.BATCH_SIZE,verbose = 0, epochs = 1)
-
     def predict(self, state):
         return self.dqn.predict(state, self.BATCH_SIZE)
+
+    def train(self, states, action_values):
+        self.dqn.fit(states, action_values, batch_size=self.BATCH_SIZE,verbose=0, epochs=1)

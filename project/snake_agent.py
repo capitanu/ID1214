@@ -17,11 +17,12 @@ class Agent():
 
         self.replay_memory = ReplayMemory(self.dqn_local)
 
-        self.t = 0
+        self.temp = 0
 
     def learn(self):
         if self.replay_memory.__len__() > self.batch_size:
             states, actions, rewards, next_states, dones = self.replay_memory.sample(self.dqn_local.INPUT_NODES)
+#            print(rewards)
             target = self.dqn_local.predict(states)
             target_val = self.dqn_target.predict(next_states)
             target_next = self.dqn_local.predict(next_states)
@@ -31,21 +32,24 @@ class Agent():
                 if dones[i]:
                     target[i][actions[i]] = rewards[i]
                 else:
-                    target[i][actions[i]] = rewards[i] + self.dqn_local.GAMMA * target_val[i][max_action_values[i]]
+                    temp2 = self.dqn_local.GAMMA * target_val[i][max_action_values[i]]
+#                    print(temp2)
+                    target[i][actions[i]] = rewards[i] + temp2
 
 
             self.dqn_local.train(states, target)
 
-            if self.t == self.dqn_local.UPDATE_RATE:
+            if self.temp == self.dqn_local.UPDATE_RATE:
                 self.update_target_weights()
-                self.t = 0
+                self.temp = 0
             else:
-                self.t = self.t + 1
+                self.temp = self.temp + 1
 
     def act(self, state, epsilon = 0):
         state = state.reshape((1,) + state.shape)
-#        print(state)
         action_values = self.dqn_local.predict(state)
+        print(action_values)
+#        print(action_values)
         if random.random() > epsilon:
             action = np.argmax(action_values)
         else:
