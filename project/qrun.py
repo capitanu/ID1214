@@ -11,7 +11,7 @@ import pygame
 ENV_WIDTH = 500
 ENV_ROWS = 10
 #night episodes = 10000000000
-episodes = 1000000
+episodes = 1500000
 wall = 0
 itself = 0
 ate = 0
@@ -23,7 +23,7 @@ each = 0
 epsilon, eps_min, eps_decay = 0.9, 0.05, 0.9997
 env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
 agent = Agent()
-#agent.dqn_local.dqn = load_model("saved/calin_3.h5")
+#agent.dqn_local.dqn = load_model("saved/calin_1.h5")
 
 def print_data(score, max_score, info, episode):
     global wall

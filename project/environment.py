@@ -155,8 +155,8 @@ class Environment():
             self.SNAKE.move(update)
         distance_after = math.sqrt(math.pow(self.SNAKE.head.pos[0] - self.snack.pos[0] , 2 ) + math.pow(self.SNAKE.head.pos[1] - self.snack.pos[1], 2))      
 
-        if distance_after > distance and (self.see_apple_1 or self.see_apple_2 or self.see_apple_3 or self.see_apple_4 or self.see_apple_5 or self.see_apple_6 or self.see_apple_7 or self.see_apple_8):
-            reward -= 10
+#        if distance_after > distance and (self.see_apple_1 or self.see_apple_2 or self.see_apple_3 or self.see_apple_4 or self.see_apple_5 or self.see_apple_6 or self.see_apple_7 or self.see_apple_8):
+ #           reward -= 10
             
         print(reward)
         return self.SNAKE.state_info_2(self.snack), reward, done, len(self.SNAKE.body), food_eaten, info
