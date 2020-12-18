@@ -17,6 +17,16 @@ class Environment():
     
 
     def __init__(self, height, width,rows,columns):
+        self.see_apple_1 = False
+        self.see_apple_2 = False
+        self.see_apple_3 = False
+        self.see_apple_4 = False
+        self.see_apple_5 = False
+        self.see_apple_6 = False
+        self.see_apple_7 = False
+        self.see_apple_8 = False
+
+        
         self.ROWS = rows
         self.COLUMNS = columns
         self.WIDTH = width;
@@ -119,12 +129,12 @@ class Environment():
         if self.SNAKE.head.pos == self.snack.pos:
             self.SNAKE.addCube()
             self.snack = Cube(self.random_apple(), color = (0,255,0))
-            reward = 50
+            reward = 100
             info = 3
             foot_eaten = True
 
         if len(self.SNAKE.body) == self.ROWS * self.ROWS:
-            reward = 100
+            reward = 1000
             done = True
             info = 4
         
@@ -140,14 +150,14 @@ class Environment():
             info = 5
         if moves >= 100:
             reward = -50
-            info = 5
 
         if not done:
             self.SNAKE.move(update)
         distance_after = math.sqrt(math.pow(self.SNAKE.head.pos[0] - self.snack.pos[0] , 2 ) + math.pow(self.SNAKE.head.pos[1] - self.snack.pos[1], 2))      
 
-        if distance_after > distance:
+        if distance_after > distance and (self.see_apple_1 or self.see_apple_2 or self.see_apple_3 or self.see_apple_4 or self.see_apple_5 or self.see_apple_6 or self.see_apple_7 or self.see_apple_8):
             reward -= 10
+            
 #        print(reward)
         return self.SNAKE.state_info_2(self.snack), reward, done, len(self.SNAKE.body), food_eaten, info
     
@@ -186,10 +196,13 @@ class Environment():
             
         if(state[10] == 1):
             self.draw_line_1(RED,(weird_flex_1, weird_flex_2) )
+            self.see_apple_1 = False
         elif(state[9] == 1):
             self.draw_line_1(GREEN,  (weird_flex_1, weird_flex_2))
+            self.see_apple_1 = True
         else:
             self.draw_line_1(WHITE,  (weird_flex_1, weird_flex_2))
+            self.see_apple_1 = False
 
 
             # -- UP ---
@@ -201,10 +214,13 @@ class Environment():
             
         if(state[13] == 1):
             self.draw_line_2(RED,(weird_flex_1, weird_flex_2))
+            self.see_apple_2 = False
         elif(state[12] == 1):
+            self.see_apple_2 = True
             self.draw_line_2(GREEN,(weird_flex_1, weird_flex_2))
         else:
             self.draw_line_2(WHITE,(weird_flex_1, weird_flex_2))
+            self.see_apple_2 = False
 
             # --- LEFT ---
         if PRINT:
@@ -215,10 +231,13 @@ class Environment():
             
         if(state[16] == 1):
             self.draw_line_3(RED,(weird_flex_1, weird_flex_2))
+            self.see_apple_3 = False
         elif(state[15] == 1):
             self.draw_line_3(GREEN,(weird_flex_1, weird_flex_2))
+            self.see_apple_3 = True
         else:
             self.draw_line_3(WHITE,(weird_flex_1, weird_flex_2))
+            self.see_apple_3 = False
 
 
             # --- DOWN ---
@@ -230,10 +249,13 @@ class Environment():
 
         if(state[19] == 1):
             self.draw_line_4(RED,(weird_flex_1, weird_flex_2))
+            self.see_apple_4 = False
         elif(state[18] == 1):
             self.draw_line_4(GREEN,(weird_flex_1, weird_flex_2))
+            self.see_apple_4 = True
         else:
             self.draw_line_4(WHITE,(weird_flex_1, weird_flex_2))
+            self.see_apple_4 = False
 
             # --- UP RIGHT ---
         if PRINT:
@@ -244,10 +266,13 @@ class Environment():
 
         if(state[22] == 1):
             self.draw_line_5(RED,(weird_flex_1, weird_flex_2))
+            self.see_apple_5 = False
         elif(state[21] == 1):
             self.draw_line_5(GREEN,(weird_flex_1, weird_flex_2))
+            self.see_apple_5 = True
         else:
             self.draw_line_5(WHITE,(weird_flex_1, weird_flex_2))
+            self.see_apple_5 = False
 
 
 
@@ -260,10 +285,13 @@ class Environment():
 
         if(state[25] == 1):
             self.draw_line_6(RED,(weird_flex_1, weird_flex_2))
+            self.see_apple_6 = False
         elif(state[24] == 1):
             self.draw_line_6(GREEN,(weird_flex_1, weird_flex_2))
+            self.see_apple_6 == True
         else:
             self.draw_line_6(WHITE,(weird_flex_1, weird_flex_2))
+            self.see_apple_6 = False
 
 
             # --- DOWN LEFT ---
@@ -275,10 +303,13 @@ class Environment():
             
         if(state[28] == 1):
             self.draw_line_7(RED,(weird_flex_1, weird_flex_2))
+            self.see_apple_7 = False
         elif(state[27] == 1):
             self.draw_line_7(GREEN,(weird_flex_1, weird_flex_2))
+            self.see_apple_7 = True
         else:
             self.draw_line_7(WHITE,(weird_flex_1, weird_flex_2))
+            self.see_apple_7 = False
 
 
 
@@ -291,10 +322,13 @@ class Environment():
 
         if(state[31] == 1):
             self.draw_line_8(RED,(weird_flex_1, weird_flex_2))
+            self.see_apple_8 = False
         elif(state[30] == 1):
             self.draw_line_8(GREEN,(weird_flex_1, weird_flex_2))
+            self.see_apple_8 = True
         else:
             self.draw_line_8(WHITE,(weird_flex_1, weird_flex_2))
+            self.see_apple_8 = False
 
         if PRINT:
             print("----------------------------------------------")

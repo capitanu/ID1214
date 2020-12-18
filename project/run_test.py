@@ -6,7 +6,7 @@ from tensorflow.keras.models import load_model
 import pygame
 
 ENV_WIDTH = 500
-ENV_ROWS = 5
+ENV_ROWS = 10
 episodes = 100
 env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
 agent = Agent()

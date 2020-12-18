@@ -15,11 +15,11 @@ class DQN:
         self.dqn.add(tf.keras.layers.Dense(units = self.HIDDEN_NODES[1], activation = tf.nn.relu))
         self.dqn.add(tf.keras.layers.Dense(units = self.HIDDEN_NODES[2], activation = tf.nn.relu))
         self.dqn.add(tf.keras.layers.Dense(units = self.OUTPUT_NODES, activation = tf.keras.activations.linear))
-        # adam = tf.keras.optimizers.Adam(self.LEARN_RATE)
-        # loss_fn = tf.keras.losses.MeanSquaredError()
-        # accuracy = tf.keras.metrics.Accuracy(name="accuracy", dtype=None)
-        # self.dqn.compile(optimizer = adam, loss = loss_fn, metrics = accuracy)
-        self.dqn.compile(optimizer = tf.keras.optimizers.Adam(self.LEARN_RATE), loss='mse',metrics=['accuracy'])
+        adam = tf.keras.optimizers.Adam(self.LEARN_RATE)
+        loss_fn = tf.keras.losses.MeanSquaredError()
+        accuracy = tf.keras.metrics.Accuracy(name="accuracy", dtype=None)
+        self.dqn.compile(optimizer = adam, loss = loss_fn, metrics = accuracy)
+        #self.dqn.compile(optimizer = tf.keras.optimizers.Adam(self.LEARN_RATE), loss='mse',metrics=['accuracy'])
 
     def predict(self, state):
         return self.dqn.predict(state, self.BATCH_SIZE)

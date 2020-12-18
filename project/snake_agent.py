@@ -2,6 +2,7 @@ import random
 from dqn import DQN
 import numpy as np
 from replay_memory import ReplayMemory
+import time
 
 class Agent():
 
@@ -20,13 +21,13 @@ class Agent():
 
     def learn(self):
         if self.replay_memory.__len__() > self.batch_size:
+            
             states, actions, rewards, next_states, dones = self.replay_memory.sample(self.dqn_local.INPUT_NODES)
-#            print(rewards)
             target = self.dqn_local.predict(states)
             target_val = self.dqn_target.predict(next_states)
             target_next = self.dqn_local.predict(next_states)
             max_action_values = np.argmax(target_next, axis = 1)
-
+            
             for i in range(self.batch_size):
                 if dones[i]:
                     target[i][actions[i]] = rewards[i]

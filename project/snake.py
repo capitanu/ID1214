@@ -5,7 +5,7 @@ import time
 
 class Cube(object):
     
-    rows = 5
+    rows = 10
     w = 500
     def __init__(self, start, dirnx = 1, dirny = 0, color = (255,0,0)):
         self.pos = start
@@ -106,7 +106,7 @@ class Snake(object):
                     snack_available_1 = 0
                 body_in_range = 1
                 break
-        state = np.append(state, [distance, snack_available_1, body_in_range])
+        state = np.append(state, [1 - distance, snack_available_1, body_in_range])
 
 
         # up
@@ -121,7 +121,7 @@ class Snake(object):
                     snack_available_2 = 0
                 body_in_range = 1
                 break
-        state = np.append(state, [distance, snack_available_2, body_in_range])
+        state = np.append(state, [1 - distance, snack_available_2, body_in_range])
 
 
         # left
@@ -136,7 +136,7 @@ class Snake(object):
                     snack_available_3 = 0
                 body_in_range = 1
                 break
-        state = np.append(state, [distance, snack_available_3, body_in_range])
+        state = np.append(state, [1 - distance, snack_available_3, body_in_range])
 
 
         # down
@@ -151,7 +151,7 @@ class Snake(object):
                     snack_available_4 = 0
                 body_in_range = 1
                 break
-        state = np.append(state, [distance, snack_available_4, body_in_range])
+        state = np.append(state, [1 - distance, snack_available_4, body_in_range])
 
         # diagonal up right
         i, j = self.head.pos[0], self.head.pos[1]
@@ -169,7 +169,7 @@ class Snake(object):
                 break
             distance += 1
         distance /= self.rows
-        state = np.append(state, [distance, snack_available, body_in_range])
+        state = np.append(state, [1 - distance, snack_available, body_in_range])
 
         # diagonal up left
         i, j = self.head.pos[0], self.head.pos[1]
@@ -187,7 +187,7 @@ class Snake(object):
                 break
             distance += 1
         distance /= self.rows
-        state = np.append(state, [distance, snack_available, body_in_range])
+        state = np.append(state, [1 - distance, snack_available, body_in_range])
 
         
         # diagonal down left
@@ -206,7 +206,7 @@ class Snake(object):
                 break
             distance += 1
         distance /= self.rows
-        state = np.append(state, [distance, snack_available, body_in_range])
+        state = np.append(state, [1 - distance, snack_available, body_in_range])
         
         
         # diagonal down right
@@ -225,7 +225,7 @@ class Snake(object):
                 break
             distance += 1
         distance /= self.rows
-        state = np.append(state, [distance, snack_available, body_in_range])
+        state = np.append(state, [1 - distance, snack_available, body_in_range])
 
         return state
         
