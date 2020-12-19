@@ -1,3 +1,4 @@
+import math
 import pygame
 import numpy as np
 import time
@@ -167,7 +168,7 @@ class Snake(object):
                 snack_available = 1
                 break
         distance = math.sqrt(math.pow(self.head.pos[0] - self.rows + 1 , 2 ) + math.pow(self.head.pos[1], 2))     
-        state = np.append(state, [1 - distance, snack_available, body_in_range])
+        state = np.append(state, [distance, snack_available, body_in_range])
 
         # diagonal up left
         i, j = self.head.pos[0], self.head.pos[1]
@@ -183,7 +184,7 @@ class Snake(object):
                 snack_available = 1
                 break
         distance = math.sqrt(math.pow(self.head.pos[0] , 2 ) + math.pow(self.head.pos[1], 2))     
-        state = np.append(state, [1 - distance, snack_available, body_in_range])
+        state = np.append(state, [distance, snack_available, body_in_range])
 
         
         # diagonal down left
@@ -200,7 +201,7 @@ class Snake(object):
                 snack_available = 1
                 break
         distance = math.sqrt(math.pow(self.head.pos[0] , 2 ) + math.pow(self.head.pos[1] - self.rows + 1, 2))     
-        state = np.append(state, [1 - distance, snack_available, body_in_range])
+        state = np.append(state, [distance, snack_available, body_in_range])
         
         
         # diagonal down right
@@ -217,8 +218,8 @@ class Snake(object):
                 snack_available = 1
                 break
         distance = math.sqrt(math.pow(self.head.pos[0] - self.rows + 1 , 2 ) + math.pow(self.head.pos[1] - self.rows + 1, 2))     
-        state = np.append(state, [1 - distance, snack_available, body_in_range])
-        print(state)
+        state = np.append(state, [distance, snack_available, body_in_range])
+        #print(state)
         return state
         
         
