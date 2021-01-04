@@ -119,6 +119,7 @@ class Snake(object):
             distance = distance_toSelf
         else: distance = distance_toWall
         state = np.append(state, [1 - distance, snack_available_1, body_in_range])
+        print("Distance right:" + str(1-distance))
 
 
         # up
@@ -144,6 +145,7 @@ class Snake(object):
             distance = distance_toSelf
         else: distance = distance_toWall
         state = np.append(state, [1 - distance, snack_available_2, body_in_range])
+        print("Distance up:" + str(1-distance))
 
 
         # left
@@ -168,7 +170,7 @@ class Snake(object):
             distance = distance_toSelf
         else: distance = distance_toWall
         state = np.append(state, [1 - distance, snack_available_3, body_in_range])
-
+        print("Distance left:" + str(1-distance))
 
         # down
         distance_toWall = (self.rows - self.head.pos[1]) / self.rows
@@ -192,6 +194,7 @@ class Snake(object):
             distance = distance_toSelf
         else: distance = distance_toWall
         state = np.append(state, [1 - distance, snack_available_4, body_in_range])
+        print("Distance down:" + str(1-distance))
 
         # diagonal up right
         i, j = self.head.pos[0], self.head.pos[1]
@@ -219,6 +222,7 @@ class Snake(object):
             distance = min(distance_toSelf, distance_toSnack)
         else: distance = distance_toWall
         state = np.append(state, [distance, snack_available, body_in_range])
+        print("Distance up right:" + str(distance))
 
         # diagonal up left
         i, j = self.head.pos[0], self.head.pos[1]
@@ -246,6 +250,7 @@ class Snake(object):
             distance = min(distance_toSelf, distance_toSnack)
         else: distance = distance_toWall
         state = np.append(state, [distance, snack_available, body_in_range])
+        print("Distance up left:" + str(distance))
 
 
         # diagonal down left
@@ -274,7 +279,7 @@ class Snake(object):
             distance = min(distance_toSelf, distance_toSnack)
         else: distance = distance_toWall
         state = np.append(state, [distance, snack_available, body_in_range])
-
+        print("Distance down left:" + str(distance))
 
         # diagonal down right
         i, j = self.head.pos[0], self.head.pos[1]
@@ -302,7 +307,11 @@ class Snake(object):
             distance = min(distance_toSelf, distance_toSnack)
         else: distance = distance_toWall
         state = np.append(state, [distance, snack_available, body_in_range])
-        #print(state)
+        print("Distance down right:" + str(distance))
+        print("-------------")
+        print(state)
+        print("-------------")
+        time.sleep(5)
         return state
 
 
