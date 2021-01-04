@@ -6,11 +6,11 @@ from tensorflow.keras.models import load_model
 import pygame
 
 ENV_WIDTH = 500
-ENV_ROWS = 10
+ENV_ROWS = 5
 episodes = 100
 env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
 agent = Agent()
-agent.dqn_local.dqn = load_model("saved/snake_dqn_2.h5")
+agent.dqn_local.dqn = load_model("saved/calin_3.h5")
 
 from tensorflow.python.client import device_lib
 print(device_lib.list_local_devices())
@@ -22,7 +22,7 @@ for episode in range(episodes):
     while True:
         action = agent.act(state)
         state, reward, done, score, apple_eaten, info = env.step(action, moves)
-        time.sleep(0.01)
+        time.sleep(0.1)
         env.render(state)
 
         if done:

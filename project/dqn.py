@@ -3,17 +3,17 @@ import tensorflow as tf
 class DQN:
 
     def __init__(self):
-        self.BATCH_SIZE = 40
+        self.BATCH_SIZE = 128
         self.GAMMA = 0.95
         self.UPDATE_RATE = 5
-        self.LEARN_RATE = 0.01
+        self.LEARN_RATE = 0.001
         self.INPUT_NODES = 32
-        self.HIDDEN_NODES = (20, 16, 10)
+        self.HIDDEN_NODES = (20, 12)
         self.OUTPUT_NODES = 4
         self.dqn = tf.keras.Sequential()
         self.dqn.add(tf.keras.layers.Dense(units = self.HIDDEN_NODES[0], input_dim = self.INPUT_NODES, activation = tf.nn.relu))
         self.dqn.add(tf.keras.layers.Dense(units = self.HIDDEN_NODES[1], activation = tf.nn.relu))
-        self.dqn.add(tf.keras.layers.Dense(units = self.HIDDEN_NODES[2], activation = tf.nn.relu))
+#        self.dqn.add(tf.keras.layers.Dense(units = self.HIDDEN_NODES[2], activation = tf.nn.relu))
         self.dqn.add(tf.keras.layers.Dense(units = self.OUTPUT_NODES, activation = tf.keras.activations.linear))
         adam = tf.keras.optimizers.Adam(self.LEARN_RATE)
         loss_fn = tf.keras.losses.MeanSquaredError()

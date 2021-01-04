@@ -6,7 +6,7 @@ import time
 
 class Cube(object):
     
-    rows = 10
+    rows = 5
     w = 500
     def __init__(self, start, dirnx = 1, dirny = 0, color = (255,0,0)):
         self.pos = start
@@ -105,7 +105,7 @@ class Snake(object):
             if self.block_in_body_except_head((i, self.head.pos[1])):
                 if(i < snack.pos[0]):
                     snack_available_1 = 0
-                body_in_range = 1
+                    body_in_range = 1
                 break
         state = np.append(state, [1 - distance, snack_available_1, body_in_range])
 
@@ -120,7 +120,7 @@ class Snake(object):
             if self.block_in_body_except_head((self.head.pos[0], i)):
                 if(i > snack.pos[1]):
                     snack_available_2 = 0
-                body_in_range = 1
+                    body_in_range = 1
                 break
         state = np.append(state, [1 - distance, snack_available_2, body_in_range])
 
@@ -135,7 +135,7 @@ class Snake(object):
             if self.block_in_body_except_head((i, self.head.pos[1])):
                 if(i > snack.pos[0]):
                     snack_available_3 = 0
-                body_in_range = 1
+                    body_in_range = 1
                 break
         state = np.append(state, [1 - distance, snack_available_3, body_in_range])
 
@@ -150,7 +150,7 @@ class Snake(object):
             if self.block_in_body_except_head((self.head.pos[0], i)):
                 if(i < snack.pos[1]):
                     snack_available_4 = 0
-                body_in_range = 1
+                    body_in_range = 1
                 break
         state = np.append(state, [1 - distance, snack_available_4, body_in_range])
 

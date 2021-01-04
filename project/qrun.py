@@ -9,9 +9,9 @@ import pygame
 
 
 ENV_WIDTH = 500
-ENV_ROWS = 10
+ENV_ROWS = 5
 #night episodes = 10000000000
-episodes = 1500000
+episodes = 150000
 wall = 0
 itself = 0
 ate = 0
@@ -70,6 +70,8 @@ for episode in range(1, episodes + 1):
         if(each % 10 == 0):
             print_data(score, max_score, info, episode)
             each += 1
+        if(each % 100 == 0):
+            agent.save()
         if(score > max_score):
             max_score = score
         if(info == 1):
