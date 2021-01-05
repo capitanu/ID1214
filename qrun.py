@@ -7,7 +7,6 @@ import time
 import pygame
 
 
-
 ENV_WIDTH = 500
 ENV_ROWS = 5
 episodes = 150000
@@ -19,10 +18,12 @@ stuck = 0
 each = 0
 
 
-epsilon, eps_min, eps_decay = 0.9, 0.05, 0.9997
+epsilon, eps_min, eps_decay = 0.1, 0.05, 0.9997
 env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
 agent = Agent()
-#agent.dqn_local.dqn = load_model("saved/calin_1.h5")
+agent.dqn_local.dqn = load_model("saved/calin_5.h5")
+
+
 
 def print_data(score, max_score, info, episode):
     global wall
@@ -54,7 +55,13 @@ for episode in range(1, episodes + 1):
     state = env.reset()
     env.render(state)
     action = agent.act(state, epsilon)
-   
+    if(episode % 100 == 0):
+            agent.save()
+    if(episode % 1000 == 0):
+            ENV_ROWS += 1
+            env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
+            state = env.reset()
+            env.render(state)
     moves = 0
     info = 0
     apple_eaten = False
@@ -68,13 +75,7 @@ for episode in range(1, episodes + 1):
         if(each % 10 == 0):
             print_data(score, max_score, info, episode)
             each += 1
-        if(each % 100 == 0):
-            agent.save()
-        if(each % 10000 == 0):
-            ENV_ROWS += 1
-            env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
-            state = env.reset()
-            env.render(state)
+        
             
         if(score > max_score):
             max_score = score

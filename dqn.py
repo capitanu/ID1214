@@ -18,8 +18,8 @@ class DQN:
         adam = tf.keras.optimizers.Adam(self.LEARN_RATE)
         loss_fn = tf.keras.losses.MeanSquaredError()
         accuracy = tf.keras.metrics.Accuracy(name="accuracy", dtype=None)
-        self.dqn.compile(optimizer = adam, loss = loss_fn, metrics = accuracy)
-        #self.dqn.compile(optimizer = tf.keras.optimizers.Adam(self.LEARN_RATE), loss='mse',metrics=['accuracy'])
+        #self.dqn.compile(optimizer = adam, loss = loss_fn, metrics = accuracy)
+        self.dqn.compile(optimizer = tf.keras.optimizers.Adam(self.LEARN_RATE), loss='mse',metrics=['accuracy'])
 
     def predict(self, state):
         return self.dqn.predict(state, self.BATCH_SIZE)
