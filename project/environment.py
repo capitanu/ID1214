@@ -32,7 +32,7 @@ class Environment():
         self.WIDTH = width;
         self.HEIGHT = height;
         self.WINDOW = pygame.display.set_mode((height+5, width+5))
-        self.SNAKE = Snake((0,0,255), (self.ROWS/2,self.ROWS/2))
+        self.SNAKE = Snake(self.ROWS, (0,0,255), (self.ROWS/2,self.ROWS/2))
 
 
     def drawGrid(self):
@@ -86,7 +86,7 @@ class Environment():
 
     def reset(self):
         self.SNAKE.reset((int(self.ROWS/2),int(self.ROWS/2)))
-        self.snack = Cube(self.random_apple(), color = (0,255,0))
+        self.snack = Cube(self.ROWS, self.random_apple(), color = (0,255,0))
         state = self.SNAKE.state_info_2(self.snack)
         return state
 
@@ -128,7 +128,7 @@ class Environment():
 
         if self.SNAKE.head.pos == self.snack.pos:
             self.SNAKE.addCube()
-            self.snack = Cube(self.random_apple(), color = (0,255,0))
+            self.snack = Cube(self.ROWS, self.random_apple(), color = (0,255,0))
             reward = 100
             info = 3
             foot_eaten = True

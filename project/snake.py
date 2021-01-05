@@ -6,13 +6,13 @@ import time
 
 class Cube(object):
     
-    rows = 5
     w = 500
-    def __init__(self, start, dirnx = 1, dirny = 0, color = (255,0,0)):
+    def __init__(self, rows, start, dirnx = 1, dirny = 0, color = (255,0,0)):
         self.pos = start
         self.dirnx = 1
         self.dirny = 0
         self.color = color
+        self.rows = rows
 
         
     def move(self, dirnx, dirny):
@@ -37,10 +37,10 @@ class Snake(object):
     body = []
     turns = {}
     
-    def __init__(self, color, pos):
+    def __init__(self, rows, color, pos):
         self.color = color
-        self.head = Cube(pos)
-        self.rows = self.head.rows
+        self.head = Cube(rows, pos)
+        self.rows = rows
         self.body.append(self.head)
         self.dirnx = 1
         self.dirny = 0
@@ -105,9 +105,10 @@ class Snake(object):
             if self.block_in_body_except_head((i, self.head.pos[1])):
                 if(i < snack.pos[0]):
                     snack_available_1 = 0
-                    body_in_range = 1
+                body_in_range = 1
                 break
-        state = np.append(state, [1 - distance, snack_available_1, body_in_range])
+        state = np.append(state, [distance, snack_available_1, body_in_range])
+       # print("Distance right: " + str(distance))
 
 
         # up
@@ -120,10 +121,10 @@ class Snake(object):
             if self.block_in_body_except_head((self.head.pos[0], i)):
                 if(i > snack.pos[1]):
                     snack_available_2 = 0
-                    body_in_range = 1
+                body_in_range = 1
                 break
-        state = np.append(state, [1 - distance, snack_available_2, body_in_range])
-
+        state = np.append(state, [distance, snack_available_2, body_in_range])
+       # print("Distance up: " + str(distance))
 
         # left
         distance = (self.head.pos[0]) / self.rows
@@ -135,10 +136,10 @@ class Snake(object):
             if self.block_in_body_except_head((i, self.head.pos[1])):
                 if(i > snack.pos[0]):
                     snack_available_3 = 0
-                    body_in_range = 1
+                body_in_range = 1
                 break
-        state = np.append(state, [1 - distance, snack_available_3, body_in_range])
-
+        state = np.append(state, [distance, snack_available_3, body_in_range])
+       # print("Distance left: " + str(distance))
 
         # down
         distance = (self.rows - self.head.pos[1]) / self.rows
@@ -150,9 +151,10 @@ class Snake(object):
             if self.block_in_body_except_head((self.head.pos[0], i)):
                 if(i < snack.pos[1]):
                     snack_available_4 = 0
-                    body_in_range = 1
+                body_in_range = 1
                 break
-        state = np.append(state, [1 - distance, snack_available_4, body_in_range])
+        state = np.append(state, [distance, snack_available_4, body_in_range])
+        #print("Distance down: " + str(distance))
 
         # diagonal up right
         i, j = self.head.pos[0], self.head.pos[1]
@@ -219,6 +221,8 @@ class Snake(object):
                 break
         distance = math.sqrt(math.pow(self.head.pos[0] - self.rows + 1 , 2 ) + math.pow(self.head.pos[1] - self.rows + 1, 2))     
         state = np.append(state, [distance, snack_available, body_in_range])
+        time.sleep(5)
+        #print("----------------")
         #print(state)
         return state
         
@@ -243,7 +247,7 @@ class Snake(object):
 
                     
     def reset(self, pos):
-        self.head = Cube(pos)
+        self.head = Cube(self.head.rows, pos)
         self.body = []
         self.body.append(self.head)
         self.addCube()
@@ -257,13 +261,13 @@ class Snake(object):
         dx, dy = tail.dirnx, tail.dirny
 
         if dx == 1 and dy == 0:
-            self.body.append(Cube((tail.pos[0]-1, tail.pos[1])))
+            self.body.append(Cube(self.head.rows, (tail.pos[0]-1, tail.pos[1])))
         elif dx == -1 and dy == 0:
-            self.body.append(Cube((tail.pos[0]+1, tail.pos[1])))
+            self.body.append(Cube(self.head.rows, (tail.pos[0]+1, tail.pos[1])))
         elif dx == 0 and dy == 1:
-            self.body.append(Cube((tail.pos[0], tail.pos[1]-1)))
+            self.body.append(Cube(self.head.rows, (tail.pos[0], tail.pos[1]-1)))
         elif dx == 0 and dy == -1:
-            self.body.append(Cube((tail.pos[0], tail.pos[1]+1)))
+            self.body.append(Cube(self.head.rows, (tail.pos[0], tail.pos[1]+1)))
 
         self.body[-1].dirnx = dx
         self.body[-1].dirny = dy

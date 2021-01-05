@@ -10,7 +10,6 @@ import pygame
 
 ENV_WIDTH = 500
 ENV_ROWS = 5
-#night episodes = 10000000000
 episodes = 150000
 wall = 0
 itself = 0
@@ -65,13 +64,18 @@ for episode in range(1, episodes + 1):
             moves = 0
         agent.experience(state, action, reward, next_state, done)
         agent.learn()
-        
         moves += 1
         if(each % 10 == 0):
             print_data(score, max_score, info, episode)
             each += 1
         if(each % 100 == 0):
             agent.save()
+        if(each % 10000 == 0):
+            ENV_ROWS += 1
+            env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
+            state = env.reset()
+            env.render(state)
+            
         if(score > max_score):
             max_score = score
         if(info == 1):
