@@ -221,7 +221,7 @@ class Snake(object):
                 break
         distance = math.sqrt(math.pow(self.head.pos[0] - self.rows + 1 , 2 ) + math.pow(self.head.pos[1] - self.rows + 1, 2))     
         state = np.append(state, [distance, snack_available, body_in_range])
-        time.sleep(5)
+#        time.sleep(5)
         #print("----------------")
         #print(state)
         return state

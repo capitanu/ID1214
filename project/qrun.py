@@ -10,7 +10,7 @@ import pygame
 
 ENV_WIDTH = 500
 ENV_ROWS = 5
-episodes = 150000
+episodes = 300000
 wall = 0
 itself = 0
 ate = 0
@@ -70,7 +70,7 @@ for episode in range(1, episodes + 1):
             each += 1
         if(each % 100 == 0):
             agent.save()
-        if(each % 10000 == 0):
+        if(each % 20000 == 0):
             ENV_ROWS += 1
             env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
             state = env.reset()
