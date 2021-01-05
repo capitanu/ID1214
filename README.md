@@ -2,7 +2,7 @@
 # Current Version 1.0
 
 ## Dependencies
-There exists three dependencies:
+There exists four dependencies:
 
 1. numpy
 2. tensorflow
