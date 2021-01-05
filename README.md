@@ -14,7 +14,7 @@ To install dependencies, run `pip3 install -r requirements.txt`
 
 ## Getting started
 
-1. Clone the repo or download it in someway `git clone https://github.com/capitanu/ID1214.git`
+1. Clone the repo or download it in some way `git clone https://github.com/capitanu/ID1214.git`
 2. In order to train the snake you need to run `qlearn.py`by using the following command:
 ```
 python qlearn.py
