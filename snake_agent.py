@@ -33,7 +33,6 @@ class Agent():
                     target[i][actions[i]] = rewards[i]
                 else:
                     temp2 = self.dqn_local.GAMMA * target_val[i][max_action_values[i]]
-#                    print(temp2)
                     target[i][actions[i]] = rewards[i] + temp2
 
 
@@ -48,8 +47,6 @@ class Agent():
     def act(self, state, epsilon = 0):
         state = state.reshape((1,) + state.shape)
         action_values = self.dqn_local.predict(state)
-#        print(action_values)
-#        print(action_values)
         if random.random() > epsilon:
             action = np.argmax(action_values)
         else:
