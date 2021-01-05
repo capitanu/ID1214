@@ -4,6 +4,8 @@ import numpy as np
 import time
 
 
+PRINT = 1
+
 class Cube(object):
     
     w = 500
@@ -96,19 +98,22 @@ class Snake(object):
         state = np.append(state, direction_tail)
 
         # right
-        distance = (self.rows - self.head.pos[0]) / self.rows
+        distance = (self.rows - 1 - self.head.pos[0]) / self.rows
         snack_available_1 = 0
         if snack.pos[1] == self.head.pos[1] and snack.pos[0]  > self.head.pos[0]:
             snack_available_1 = 1
+            distance = (snack.pos[0] - 1 - self.head.pos[0])/self.rows
         body_in_range = 0
         for i in range(self.head.pos[0] + 1, self.rows):
             if self.block_in_body_except_head((i, self.head.pos[1])):
                 if(i < snack.pos[0]):
                     snack_available_1 = 0
+                distance = (i - 1 - self.head.pos[0]) / self.rows
                 body_in_range = 1
                 break
         state = np.append(state, [distance, snack_available_1, body_in_range])
-       # print("Distance right: " + str(distance))
+        if(PRINT):
+            print("Distance right: " + str(distance))
 
 
         # up
@@ -116,45 +121,54 @@ class Snake(object):
         snack_available_2 = 0
         if snack.pos[0] == self.head.pos[0] and snack.pos[1] < self.head.pos[1]:
             snack_available_2 = 1
+            distance = (self.head.pos[1] - 1 - snack.pos[1]) / self.rows
         body_in_range = 0
-        for i in range(0, self.head.pos[1]):
+        for i in range(self.head.pos[1] - 1, -1, -1):
             if self.block_in_body_except_head((self.head.pos[0], i)):
                 if(i > snack.pos[1]):
                     snack_available_2 = 0
                 body_in_range = 1
+                distance = (self.head.pos[1] - 1 - i) / self.rows
                 break
         state = np.append(state, [distance, snack_available_2, body_in_range])
-       # print("Distance up: " + str(distance))
+        if(PRINT):
+            print("Distance up: " + str(distance))
 
         # left
         distance = (self.head.pos[0]) / self.rows
         snack_available_3 = 0
         if snack.pos[1] == self.head.pos[1] and snack.pos[0] < self.head.pos[0]:
             snack_available_3 = 1
+            distance = (self.head.pos[0] - 1 - snack.pos[0]) / self.rows
         body_in_range = 0
-        for i in range(0,self.head.pos[0]):
+        for i in range(self.head.pos[0] - 1, -1 , -1):
             if self.block_in_body_except_head((i, self.head.pos[1])):
                 if(i > snack.pos[0]):
                     snack_available_3 = 0
                 body_in_range = 1
+                distance = (self.head.pos[0] - 1 - i) / self.rows
                 break
         state = np.append(state, [distance, snack_available_3, body_in_range])
-       # print("Distance left: " + str(distance))
+        if(PRINT):
+            print("Distance left: " + str(distance))
 
         # down
-        distance = (self.rows - self.head.pos[1]) / self.rows
+        distance = (self.rows - 1 - self.head.pos[1]) / self.rows
         snack_available_4 = 0
         if snack.pos[0] == self.head.pos[0] and snack.pos[1]  > self.head.pos[1]:
             snack_available_4 = 1
+            distance = (snack.pos[1] - 1 - self.head.pos[1]) / self.rows
         body_in_range = 0
         for i in range(self.head.pos[1] + 1,self.rows):
             if self.block_in_body_except_head((self.head.pos[0], i)):
                 if(i < snack.pos[1]):
                     snack_available_4 = 0
                 body_in_range = 1
+                distance = (snack.pos[1] - 1 - self.head.pos[1]) / self.rows
                 break
         state = np.append(state, [distance, snack_available_4, body_in_range])
-        #print("Distance down: " + str(distance))
+        if(PRINT):
+            print("Distance down: " + str(distance))
 
         # diagonal up right
         i, j = self.head.pos[0], self.head.pos[1]
@@ -171,6 +185,7 @@ class Snake(object):
                 break
         distance = math.sqrt(math.pow(self.head.pos[0] - self.rows + 1 , 2 ) + math.pow(self.head.pos[1], 2))     
         state = np.append(state, [distance, snack_available, body_in_range])
+            
 
         # diagonal up left
         i, j = self.head.pos[0], self.head.pos[1]
@@ -221,9 +236,10 @@ class Snake(object):
                 break
         distance = math.sqrt(math.pow(self.head.pos[0] - self.rows + 1 , 2 ) + math.pow(self.head.pos[1] - self.rows + 1, 2))     
         state = np.append(state, [distance, snack_available, body_in_range])
-#        time.sleep(5)
-        #print("----------------")
-        #print(state)
+        time.sleep(5)
+        if(PRINT):
+            print("----------------")
+#        print(state)
         return state
         
         
