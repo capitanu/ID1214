@@ -7,6 +7,10 @@ import time
 import pygame
 
 
+
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"   
+
 ENV_WIDTH = 500
 ENV_ROWS = 5
 episodes = 150000
@@ -111,9 +115,5 @@ for episode in range(1, episodes + 1):
                 if keys[pygame.K_q]:
                     agent.save()
                     exit(0)
-
-if tf.test.gpu_device_name():
-    print('GPU found')
-else:
-    print("No GPU found")      
+   
 agent.save()

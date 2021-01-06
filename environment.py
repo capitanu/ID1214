@@ -167,6 +167,8 @@ class Environment():
         while True:
             x = random.randrange(self.ROWS)
             y = random.randrange(self.ROWS)
+            if(len(self.SNAKE.body) == self.ROWS * self.ROWS):
+                    break
             if len(list(filter(lambda snakeblock: snakeblock.pos == (x,y), positions))) > 0:
                 continue
             else:
