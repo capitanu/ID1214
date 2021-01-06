@@ -25,6 +25,8 @@ for episode in range(episodes):
         time.sleep(0.1)
         env.render(state)
 
+        if(info == 4):
+            time.sleep(5)
         if done:
             break
         for event in pygame.event.get():

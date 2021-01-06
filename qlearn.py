@@ -76,6 +76,9 @@ for episode in range(1, episodes + 1):
         agent.experience(state, action, reward, next_state, done)
         agent.learn()
         moves += 1
+        if(info == 4):
+            time.sleep(2)
+
         if(each % 10 == 0):
             print_data(score, max_score, info, episode)
             each += 1

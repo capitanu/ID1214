@@ -12,7 +12,6 @@ WHITE = (255,255,255)
 GREEN = (0, 255 ,0)
 PRINT = False
 
-
 class Environment():
     
 
@@ -128,7 +127,8 @@ class Environment():
 
         if self.SNAKE.head.pos == self.snack.pos:
             self.SNAKE.addCube()
-            self.snack = Cube(self.ROWS, self.random_apple(), color = (0,255,0))
+            if len(self.SNAKE.body) != self.ROWS * self.ROWS:
+                self.snack = Cube(self.ROWS, self.random_apple(), color = (0,255,0))
             reward = 100
             info = 3
             foot_eaten = True
@@ -168,7 +168,7 @@ class Environment():
             x = random.randrange(self.ROWS)
             y = random.randrange(self.ROWS)
             if(len(self.SNAKE.body) == self.ROWS * self.ROWS):
-                    break
+                break
             if len(list(filter(lambda snakeblock: snakeblock.pos == (x,y), positions))) > 0:
                 continue
             else:
