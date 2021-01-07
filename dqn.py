@@ -3,10 +3,10 @@ import tensorflow as tf
 class DQN:
 
     def __init__(self):
-        self.BATCH_SIZE = 64
+        self.BATCH_SIZE = 32
         self.GAMMA = 0.95
         self.UPDATE_RATE = 5
-        self.LEARN_RATE = 0.0001
+        self.LEARN_RATE = 0.001
         self.INPUT_NODES = 32
         self.HIDDEN_NODES = (20, 12)
         self.OUTPUT_NODES = 4

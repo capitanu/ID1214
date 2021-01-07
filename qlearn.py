@@ -22,7 +22,7 @@ stuck = 0
 each = 0
 
 
-epsilon, eps_min, eps_decay = 0.9, 0.05, 0.9999997
+epsilon, eps_min, eps_decay = 0.9, 0.05, 0.997
 env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
 agent = Agent()
 #agent.dqn_local.dqn = load_model("saved/amir_4.h5")
