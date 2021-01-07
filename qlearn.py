@@ -8,12 +8,12 @@ import pygame
 
 
 
-import os
-os.environ["CUDA_VISIBLE_DEVICES"]="-1"   
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"   
 
 ENV_WIDTH = 500
-ENV_ROWS = 5
-episodes = 150000
+ENV_ROWS = 6
+episodes = 100000
 wall = 0
 itself = 0
 ate = 0
@@ -22,10 +22,11 @@ stuck = 0
 each = 0
 
 
-epsilon, eps_min, eps_decay = 0.9, 0.05, 0.9997
+epsilon, eps_min, eps_decay = 0.9, 0.05, 0.9999997
 env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
 agent = Agent()
-#agent.dqn_local.dqn = load_model("saved/calin_5.h5")
+#agent.dqn_local.dqn = load_model("saved/amir_4.h5")
+#agent.dqn_target.dqn = load_model("saved/amir_4.h5") 
 
 
 
@@ -61,7 +62,7 @@ for episode in range(1, episodes + 1):
     action = agent.act(state, epsilon)
     if(episode % 100 == 0):
             agent.save()
-    if(episode % 1000 == 0):
+    if(episode % 1000000 == 0):
             ENV_ROWS += 1
             env = Environment(ENV_WIDTH, ENV_WIDTH, ENV_ROWS, ENV_ROWS)
             state = env.reset()
@@ -103,20 +104,22 @@ for episode in range(1, episodes + 1):
         if done:
             break
         state = next_state
+ #       print(state)
+#        time.sleep(10)
         env.render(state)
         
         action = agent.act(state, epsilon)
 
         
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
 
             keys = pygame.key.get_pressed()
 
             for key in keys:
                 if keys[pygame.K_q]:
                     agent.save()
+                    print("Epsilon is:" + str(epsilon))
+                    pygame.quit()
                     exit(0)
    
 agent.save()

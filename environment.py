@@ -125,13 +125,14 @@ class Environment():
             reward = -50
             done = True
 
+        food_eaten = False
         if self.SNAKE.head.pos == self.snack.pos:
             self.SNAKE.addCube()
             if len(self.SNAKE.body) != self.ROWS * self.ROWS:
                 self.snack = Cube(self.ROWS, self.random_apple(), color = (0,255,0))
+            food_eaten = True
             reward = 100
             info = 3
-            foot_eaten = True
 
         if len(self.SNAKE.body) == self.ROWS * self.ROWS:
             reward = 1000
@@ -144,7 +145,7 @@ class Environment():
             reward = -50
             info = 1
 
-        if moves >= 1000:
+        if moves >= 100:
             done = True
             reward = -100
             info = 5
