@@ -1,5 +1,4 @@
 # Snake AI
-# Current Version 1.0
 
 ## Dependencies
 There exists four dependencies:
@@ -22,13 +21,42 @@ python qlearn.py
 3. To change the settings of the training such as number of training episodes and number of rows you need to change `episodes` and `ENV_ROWS` variables in `qlearn.py`.
 4. Enjoy! 
 
-## Training on top of an already trained data
-1. If you have trained your snake atleast once and wish to train it again on top of that you need to include `agent.dqn_local.dqn = load_model("saved/file_name.h5")` in `qlearn.py`.
-  
-  Note that by default the training data will be saved every 100 episodes to `saved/snake_dqn_2.h5`
-
 ## Running
 To test the snake you need to run `qtest.py` by using the following command:
 ```
 python qtest.py
 ```
+
+## Settings
+
+Some variables that you might want to change in order to tweak the training or the running of the snake:
+
+### Running
+
+In **qtest.py** :
+
+	ENV_ROWS = X
+
+Where X is the number of rows you'd want your snake's environemnt to be.
+
+	agent.dqn_local.dqn = load_model("saved/7x7.h5")
+	
+Where you could replace **7x7.h5** with one of the trained networks located under __saved/__.
+
+
+### Learning
+
+In **qlearn.py** :
+
+	ENV_ROWS = X
+	
+Where X is the number of rows you would want your snake's environment to be.
+
+	episodes = X
+
+Where X is the number of games you want the agent to play.
+
+	GROW = X
+	
+Where X is the number of episodes you want the snake to run on the same size map. If you want the size to be constant, make sure that **GROW** is larger than **episodes**.
+
